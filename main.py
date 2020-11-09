@@ -11,27 +11,30 @@ def main():
     conf = YamlLintConfig("extends: default")
     warning_count = 0
 
-    with open(yaml_path) as f:
-        problems = linter.run(f, conf, yaml_path)
+    try:
+        with open(yaml_path) as f:
+            problems = linter.run(f, conf, yaml_path)
 
-    for problem in problems:
+        for problem in problems:
 
-        if problem.level == "warning" and strict:
-            problem.level = "error"
+            if problem.level == "warning" and strict:
+                problem.level = "error"
 
-        print(
-            f"::{problem.level} file={yaml_path},line={problem.line},"
-            f"col={problem.column}::{problem.desc} ({problem.rule})"
-        )
+            print(
+                f"::{problem.level} file={yaml_path},line={problem.line},"
+                f"col={problem.column}::{problem.desc} ({problem.rule})"
+            )
 
-        if problem.level == "warning":
-            warning_count = warning_count + 1
+            if problem.level == "warning":
+                warning_count = warning_count + 1
 
-        if problem.level == "error":
-            sys.exit(1)
+            if problem.level == "error":
+                sys.exit(1)
 
-    print(f"::set-output name=warnings::{warning_count}")
+        print(f"::set-output name=warnings::{warning_count}")
 
+    except Exception as err:
+          print(f"Oops!  Detected exception  {format(err)}")
     sys.exit(0)
 
 

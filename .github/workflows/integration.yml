@@ -10,7 +10,7 @@ jobs:
         uses: briegel0/gha-lint-yaml@master
         with:
           path: "tests/valid.yaml"
-      - name: Check outputs and modified files
+      - name: Check outputs and modified files Valid
         run: |
           echo "The warnings is ${{ steps.selftestValid.outputs.warnings }}"
           test "${{ steps.selftestValid.outputs.warnings }}" == "1"
@@ -19,7 +19,7 @@ jobs:
         uses: briegel0/gha-lint-yaml@master
         with:
           path: "tests/invalid.yaml"
-      - name: Check outputs and modified files
+      - name: Check outputs and modified files InValid
         run: |
           echo "The warnings is ${{ steps.selftestInValid.outputs.warnings }}"
           test "${{ steps.selftestInValid.outputs.warnings }}" == "1"          
