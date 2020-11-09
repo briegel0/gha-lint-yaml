@@ -10,6 +10,7 @@ def main():
     strict = os.environ["INPUT_STRICT"] == "true"
     conf = YamlLintConfig("extends: default")
     warning_count = 0
+    error_count = 0
 
     try:
         with open(yaml_path) as f:
@@ -28,10 +29,14 @@ def main():
             if problem.level == "warning":
                 warning_count = warning_count + 1
 
+            
             if problem.level == "error":
-                sys.exit(1)
+                error_count = error_count + 1
+                # sys.exit(1)
+            
 
         print(f"::set-output name=warnings::{warning_count}")
+        print(f"::set-output name=errors::{error_count}")
 
     except Exception as err:
         print(f"Oops!  Detected exception  {format(err)}")
