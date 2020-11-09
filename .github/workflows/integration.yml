@@ -5,6 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+
       - name: Self test valid
         id: selftestValid
         uses: briegel0/gha-lint-yaml@master
@@ -16,17 +17,21 @@ jobs:
           echo "The errors is ${{ steps.selftestValid.outputs.errors }}"
           test "${{ steps.selftestValid.outputs.warnings }}" == "0"
           test "${{ steps.selftestValid.outputs.errors }}" == "0"  
-      - name: Self test valid
+
+      - name: Self test valid Warning
         id: selftestWarning
         uses: briegel0/gha-lint-yaml@master
         with:
           path: "tests/validwarning.yaml"
+
       - name: Check outputs and modified files ValidWarning
         run: |
             echo "The warnings is ${{ steps.selftestWarning.outputs.warnings }}"
             echo "The errors is ${{ steps.selftestWarning.outputs.errors }}"
-            test "${{ steps.selftestWarning.outputs.warnings }}" == "1"  
-            test "${{ steps.selftestWarning.outputs.errors }}" == "0"         
+            test "${{ steps.selftestWarning.outputs.warnings }}" == "1"  selftestWarning
+            test "${{ steps.selftestWarning.outputs.errors }}" == "0"  
+             
+      - name: Self test Invalid                 
         id: selftestInValid
         uses: briegel0/gha-lint-yaml@master
         with:
