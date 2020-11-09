@@ -14,8 +14,19 @@ jobs:
         run: |
           echo "The warnings is ${{ steps.selftestValid.outputs.warnings }}"
           echo "The errors is ${{ steps.selftestValid.outputs.errors }}"
-          test "${{ steps.selftestValid.outputs.warnings }}" == "1"
-      - name: Self test Invalid
+          test "${{ steps.selftestValid.outputs.warnings }}" == "0"
+          test "${{ steps.selftestValid.outputs.errors }}" == "0"  
+      - name: Self test valid
+        id: selftestWarning
+        uses: briegel0/gha-lint-yaml@master
+        with:
+          path: "tests/validwarning.yaml"
+      - name: Check outputs and modified files ValidWarning
+        run: |
+            echo "The warnings is ${{ steps.selftestWarning.outputs.warnings }}"
+            echo "The errors is ${{ steps.selftestWarning.outputs.errors }}"
+            test "${{ steps.selftestWarning.outputs.warnings }}" == "1"  
+            test "${{ steps.selftestWarning.outputs.errors }}" == "0"         
         id: selftestInValid
         uses: briegel0/gha-lint-yaml@master
         with:
@@ -24,5 +35,5 @@ jobs:
         run: |
           echo "The warnings is ${{ steps.selftestInValid.outputs.warnings }}"
           echo "The errors is ${{ steps.selftestValid.outputs.errors }}"
-          test "${{ steps.selftestInValid.outputs.warnings }}" == "1"          
+          test "${{ steps.selftestInValid.outputs.errors }}" == "1"          
           
