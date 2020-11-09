@@ -28,9 +28,9 @@ jobs:
         run: |
             echo "The warnings is ${{ steps.selftestWarning.outputs.warnings }}"
             echo "The errors is ${{ steps.selftestWarning.outputs.errors }}"
-            test "${{ steps.selftestWarning.outputs.warnings }}" == "1"  selftestWarning
+            test "${{ steps.selftestWarning.outputs.warnings }}" == "1"  
             test "${{ steps.selftestWarning.outputs.errors }}" == "0"  
-             
+
       - name: Self test Invalid                 
         id: selftestInValid
         uses: briegel0/gha-lint-yaml@master
