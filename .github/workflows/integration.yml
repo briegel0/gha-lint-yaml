@@ -7,7 +7,7 @@ jobs:
       - uses: actions/checkout@master
       - name: Self test
         id: selftest
-        uses: jacobtomlinson/gha-lint-yaml@master
+        uses: briegel0/gha-lint-yaml@master
         with:
           path: "tests/valid.yaml"
       - name: Check outputs and modified files
