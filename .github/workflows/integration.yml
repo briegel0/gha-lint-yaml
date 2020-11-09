@@ -39,6 +39,6 @@ jobs:
       - name: Check outputs and modified files InValid
         run: |
           echo "The warnings is ${{ steps.selftestInValid.outputs.warnings }}"
-          echo "The errors is ${{ steps.selftestValid.outputs.errors }}"
+          echo "The errors is ${{ steps.selftestInValid.outputs.errors }}"
           test "${{ steps.selftestInValid.outputs.errors }}" == "1"          
           
