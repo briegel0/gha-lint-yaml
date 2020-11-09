@@ -1,17 +1,26 @@
-name: Integration Test
+name: Yaml Lint Test
 on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Self test
-        id: selftest
+      - name: Self test valid
+        id: selftestValid
         uses: briegel0/gha-lint-yaml@master
         with:
           path: "tests/valid.yaml"
       - name: Check outputs and modified files
         run: |
-          echo "The warnings is ${{ steps.selftest.outputs.warnings }}"
-          test "${{ steps.selftest.outputs.warnings }}" == "1"
+          echo "The warnings is ${{ steps.selftestValid.outputs.warnings }}"
+          test "${{ steps.selftestValid.outputs.warnings }}" == "1"
+      - name: Self test Invalid
+        id: selftestInValid
+        uses: briegel0/gha-lint-yaml@master
+        with:
+          path: "tests/invalid.yaml"
+      - name: Check outputs and modified files
+        run: |
+          echo "The warnings is ${{ steps.selftestInValid.outputs.warnings }}"
+          test "${{ steps.selftestInValid.outputs.warnings }}" == "1"          
           
