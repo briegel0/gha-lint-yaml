@@ -12,5 +12,6 @@ jobs:
           path: "tests/valid.yaml"
       - name: Check outputs and modified files
         run: |
-          test "${{ steps.selftest.outputs.warnings }}" == "1"
           echo "The warnings is ${{ steps.selftest.outputs.warnings }}"
+          test "${{ steps.selftest.outputs.warnings }}" == "1"
+          
