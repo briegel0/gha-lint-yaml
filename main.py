@@ -34,7 +34,7 @@ def main():
         print(f"::set-output name=warnings::{warning_count}")
 
     except Exception as err:
-          print(f"Oops!  Detected exception  {format(err)}")
+        print(f"Oops!  Detected exception  {format(err)}")
     sys.exit(0)
 
 
