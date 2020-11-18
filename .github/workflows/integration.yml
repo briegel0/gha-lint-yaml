@@ -9,6 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: echo env enviorment variables
+        run: echo GITHUB_RUN_ID GITHUB_RUN_ID GITHUB_RUN_NUMBER $GITHUB_RUN_NUMBER GITHUB_ACTION $GITHUB_ACTION
+
       - uses: actions/checkout@master
 
       - name: Self test valid
